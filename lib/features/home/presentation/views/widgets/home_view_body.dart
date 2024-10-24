@@ -11,19 +11,50 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomAppBar(title: 'BOOKLY', icon: FontAwesomeIcons.magnifyingGlass),
-        FeaturedBooksListItems(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Text(
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomAppBar(title: 'BOOKLY', icon: FontAwesomeIcons.magnifyingGlass),
+          FeaturedBooksListItems(),
+          Text(
             'Best Sellers',
             style: Styles.titleMedium,
           ),
-        )
-      ],
+          BestSellersListViewItems(),
+        ],
+      ),
+    );
+  }
+}
+
+class BestSellersListViewItems extends StatelessWidget {
+  const BestSellersListViewItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 125,
+      child: Row(
+        children: [
+          AspectRatio(
+            aspectRatio: 2.3 / 4,
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.black,
+                  image: const DecorationImage(
+                    image: AssetImage(AssetsData.book1),
+                    fit: BoxFit.fill,
+                  )),
+            ),
+          ),
+          const Column(
+            children: [],
+          ),
+        ],
+      ),
     );
   }
 }
