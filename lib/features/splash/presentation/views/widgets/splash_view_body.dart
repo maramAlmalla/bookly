@@ -3,7 +3,6 @@ import 'package:bookly/features/home/presentation/home_view.dart';
 import 'package:bookly/features/splash/presentation/views/widgets/sliding_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -22,7 +21,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     super.initState();
     initSlidingAnimation();
 
-    NavigateToHome();
+    navigateToHome();
   }
 
   @override
@@ -37,7 +36,13 @@ class _SplashViewBodyState extends State<SplashViewBody>
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Image.asset(AssetsData.logo),
+        Image.asset(AssetsData.logo, width: 100, height: 100,
+            errorBuilder: (context, error, stackTrace) {
+          return const Text('Image failed to load');
+        }),
+        const SizedBox(
+          height: 4,
+        ),
         AnimatedBuilder(
             animation: slidingAnimation,
             builder: (context, _) {
@@ -60,11 +65,11 @@ class _SplashViewBodyState extends State<SplashViewBody>
     animationController.forward();
   }
 
-  void NavigateToHome() {
-    Future.delayed(const Duration(seconds: 2), () {
+  void navigateToHome() {
+    Future.delayed(const Duration(seconds: 4), () {
       Get.to(() => const HomeView(),
-          duration: const Duration(milliseconds: 250),
-          transition: Transition.fade);
+          duration: const Duration(milliseconds: 500),
+          transition: Transition.downToUp);
     });
   }
 }
